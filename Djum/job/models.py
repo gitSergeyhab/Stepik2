@@ -23,7 +23,15 @@ class Jobs(models.Model):
     salary_from = models.IntegerField(verbose_name="Зарплата от")
     salary_to = models.IntegerField(verbose_name="Зарплата до")
     posted = models.DateField(verbose_name="Дата размещения", auto_now_add=True)
-    desc = models.CharField(max_length=32, verbose_name="ХЗ")
+    desc = models.CharField(max_length=32, verbose_name="ХЗ", blank=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Вакансия"
+        verbose_name_plural = "Вакансии"
+        ordering = ['-posted']
 
 
 jobs = [
