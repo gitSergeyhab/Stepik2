@@ -1,18 +1,30 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Specialties, Companies, Jobs
+from .models import Specialty, Company, Vacancy
 
 
-class JobAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'category', 'company', 'salary_from', 'salary_to', 'posted']
+class VacancyAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'specialty', 'company', 'salary_min', 'salary_max', 'published_at']
     list_display_links = ['id', 'title']
-    search_fields = ['title', 'category', 'company', ]
+    search_fields = ['title', 'specialty', 'company', 'published_at']
 
 
-admin.site.register(Specialties)
-admin.site.register(Companies)
-admin.site.register(Jobs, JobAdmin)
+class SpecialtyAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'code']
+    list_display_links = ['id', 'title']
+    search_fields = ['title']
+
+
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'location', 'employee_count']
+    list_display_links = ['id', 'name']
+    search_fields = ['name', 'location', 'employee_count']
+
+
+admin.site.register(Specialty, SpecialtyAdmin)
+admin.site.register(Company, CompanyAdmin)
+admin.site.register(Vacancy, VacancyAdmin)
 
 # title = models.CharField(max_length=64, verbose_name="Профессия")
 # category = models.CharField(max_length=32, verbose_name="Категория")
