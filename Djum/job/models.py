@@ -22,7 +22,7 @@ class Jobs(models.Model):
     company = models.CharField(max_length=32, verbose_name="Компания")
     salary_from = models.IntegerField(verbose_name="Зарплата от")
     salary_to = models.IntegerField(verbose_name="Зарплата до")
-    posted = models.DateField(verbose_name="Дата размещения")
+    posted = models.DateField(verbose_name="Дата размещения", auto_now_add=True)
     desc = models.CharField(max_length=32, verbose_name="ХЗ")
 
 
@@ -41,6 +41,6 @@ jobs = [
 
 ]
 
-for i in jobs:
-    Jobs.objects.create(title=i["title"], category=i["cat"], company=i["company"], salary_from=i["salary_from"],
-                        salary_to=i["salary_to"], posted=i["posted"], desc=i["desc"])
+# for i in jobs:
+#     Jobs.objects.create(title=i["title"], category=i["cat"], company=i["company"], salary_from=i["salary_from"],
+#                         salary_to=i["salary_to"],  desc=i["desc"])
