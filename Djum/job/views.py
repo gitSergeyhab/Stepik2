@@ -3,11 +3,12 @@ from django.views import View
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
+from .models import Specialty, Company, Vacancy
 
 
-class MainView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'job/index.html')
+class MainView(ListView):
+    model = Specialty
+    template_name = 'job/index.html'
 
 
 # – Все вакансии списком   /vacancies

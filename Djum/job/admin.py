@@ -25,11 +25,3 @@ class CompanyAdmin(admin.ModelAdmin):
 admin.site.register(Specialty, SpecialtyAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Vacancy, VacancyAdmin)
-
-# title = models.CharField(max_length=64, verbose_name="Профессия")
-# category = models.CharField(max_length=32, verbose_name="Категория")
-# company = models.CharField(max_length=32, verbose_name="Компания")
-# salary_from = models.IntegerField(verbose_name="Зарплата от")
-# salary_to = models.IntegerField(verbose_name="Зарплата до")
-# posted = models.DateField(verbose_name="Дата размещения", auto_now_add=True)
-# desc = models.CharField(max_length=32, verbose_name="ХЗ")

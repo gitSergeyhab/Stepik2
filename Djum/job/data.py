@@ -82,6 +82,4 @@ specialties = [
 #     in_search = 'Ищу работу'
 
 
-from job.models import Jobs
-
 
