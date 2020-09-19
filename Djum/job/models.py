@@ -106,7 +106,7 @@ skillist = ['Python', 'Django', 'Flask', 'PHP', 'JS', 'Node', 'Vue', 'React', 'G
 def skill_maker(x):
     shuffle(skillist)
     xx = list(range(x - 1, x + 1))
-    return ', '.join(skillist[:choice(xx)])
+    return ' • '.join(skillist[:choice(xx)])
 
 # уже выполнено - раскомментировать при создании базы данных  и импорт рандом!
 # for j in jobs:
@@ -115,4 +115,4 @@ def skill_maker(x):
 #                            company=Company.objects.filter(name=j['company'])[0],
 #                            skills=skill_maker(4), description=j['desc'],
 #                            salary_min=j['salary_from'], salary_max=j['salary_to'])
-
+#

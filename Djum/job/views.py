@@ -6,10 +6,12 @@ from django.views.generic import ListView, DetailView
 from .models import Specialty, Company, Vacancy
 
 title = 'Джуманджи'
+
+
 class MainView(ListView):
     model = Specialty
     template_name = 'job/index.html'
-    context_object_name = 'MVspec'
+    context_object_name = 'main_specy'
     extra_context = {'title': title}
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -17,9 +19,12 @@ class MainView(ListView):
         context['company'] = Company.objects.all()
         return context
 
+
 # – Все вакансии списком   /vacancies
-class ListVacancy(ListView):
-    pass
+class ListVacancies(ListView):
+    model = Vacancy
+    context_object_name = 'list_vacancies'
+    template_name = 'job/vacancies.html'
 
 
 # – Вакансии по специализации /vacancies/cat/frontend
