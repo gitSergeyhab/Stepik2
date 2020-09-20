@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
 
 
+
+{% block first_section %}
+{% if flag %}
+<h1 class="h1 text-center mx-auto mt-4 pt-5" style="font-size: 70px;"><strong>{{ flag.0 }}</strong></h1>
+{% else %}
+<h1 class="h1 text-center mx-auto mt-4 pt-5" style="font-size: 70px;"><strong>Все вакансии</strong></h1>
+{% endif %}
+{% endblock %}
+
+
 {% block cards1 %}
-
-
     <section>
-      <h1 class="h1 text-center mx-auto mt-4 pt-5" style="font-size: 70px;"><strong>Все вакансии</strong></h1>
-      <p class="text-center pt-1">{{ list_vacancies|length }} вакансий</p>
+      <p class="text-center pt-1">{{ vacancies|length }} вакансий</p>
       <div class="row mt-5">
         <div class="col-12 col-lg-8 offset-lg-2 m-auto">
-          {% for vac in list_vacancies %}
+          {% for vac in vacancies %}
 
           <div class="card mb-4">
             <div class="card-body px-4">
@@ -21,7 +28,8 @@
                   <p class="text-muted pt-1">{{ vac.published_at }}</p>
                 </div>
                 <div class="col-12 col-md-4 col-lg-3 d-flex align-items-end">
-                  <a href="#"><img src="../static/logs/logo{{vac.id}}.png" width="130" height="80" alt=""></a>
+<!--                  <a href="{{ vac.company.get_absolute_url }}"><img src="../static/logs/logo{{ vac.company.pk }}.png" width="130" height="80" alt=""></a>-->
+                  <a href="{{ vac.company.get_absolute_url }}"><img src="../../static/logs/logo{{ vac.company.pk }}.png" width="130" height="80" alt=""></a>
                 </div>
               </div>
             </div>

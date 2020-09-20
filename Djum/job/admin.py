@@ -14,6 +14,7 @@ class SpecialtyAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'code']
     list_display_links = ['id', 'title']
     search_fields = ['title']
+    # prepopulated_fields = {'slug': ('code',)}
 
 
 class CompanyAdmin(admin.ModelAdmin):

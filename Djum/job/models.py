@@ -1,6 +1,8 @@
 from django.db import models
 from random import choice, shuffle
 
+from django.urls import reverse
+
 
 class Company(models.Model):
     name = models.CharField(max_length=32, verbose_name="Компания")
@@ -8,6 +10,9 @@ class Company(models.Model):
     logo = models.ImageField(verbose_name="Логотип", upload_to="logs/%Y/%m/%d/", blank=True)
     description = models.TextField(verbose_name="Информация о компании", blank=True)
     employee_count = models.IntegerField(verbose_name="Количество сотрудников", null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('company', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name
@@ -19,8 +24,12 @@ class Company(models.Model):
 
 class Specialty(models.Model):
     code = models.CharField(max_length=32, verbose_name="Код")
+    slug = models.SlugField()
     title = models.CharField(max_length=32, verbose_name="Специализация")
     picture = models.ImageField(verbose_name="Картинка", upload_to="pics/%Y/%m/%d/", blank=True)
+
+    def get_absolute_url(self):
+        return reverse('specialties', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title
@@ -39,6 +48,9 @@ class Vacancy(models.Model):
     salary_min = models.IntegerField(verbose_name="Зарплата от")
     salary_max = models.IntegerField(verbose_name="Зарплата до")
     published_at = models.DateField(verbose_name="Опубликовано", auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('vacancies', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.title
@@ -67,7 +79,7 @@ cities = ['Пермь', 'Санкт-Петербург', 'Екатеринбур
 # уже выполнено - раскомментировать при создании базы данных  и импорт рандом!
 # for com in companies:
 #     Company.objects.create(name=com['title'], location=choice(cities), employee_count=choice(list(range(1,500))))
-
+#
 
 """ Категории """
 specialties = [
@@ -81,9 +93,9 @@ specialties = [
     {"code": "testing", "title": "Тестирование"},
 ]
 
-# уже выполнено  - раскомментировать при создании базы данных
+# уже выполнено  - раскомментировать при создании базы данных !!! добавлен слаг
 # for sp in specialties:
-#     Specialty.objects.create(code=sp['code'], title=sp['title'])
+#     Specialty.objects.create(code=sp['code'], slug=sp['code'], title=sp['title'])
 
 
 jobs = [
@@ -115,4 +127,4 @@ def skill_maker(x):
 #                            company=Company.objects.filter(name=j['company'])[0],
 #                            skills=skill_maker(4), description=j['desc'],
 #                            salary_min=j['salary_from'], salary_max=j['salary_to'])
-#
+
