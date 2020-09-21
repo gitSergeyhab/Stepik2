@@ -23,5 +23,5 @@ urlpatterns = [
     path('company/', Companies.as_view(), name='companies'),
     path('company/<int:pk>', CardCompany.as_view(), name='company'),
     path('vacancies/cat/<str:slug>', ListVacSpecialties.as_view(), name='specialties'),
-    path('vacancy/<int:pk>', OneVacancy.as_view(), name='vacancy'),
+    path('vacancies/<int:pk>', OneVacancy.as_view(), name='vacancy'),
 ]

@@ -61,6 +61,7 @@ class ListVacancies(ListView):
 # – Одна вакансия /vacancies/22
 class OneVacancy(DetailView):
     model = Vacancy
+    context_object_name = 'vacancy'
     template_name = 'job/vacancy.html'
     extra_context = {
         'title': title,

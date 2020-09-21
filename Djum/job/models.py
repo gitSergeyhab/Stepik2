@@ -1,7 +1,7 @@
 from django.db import models
 from random import choice, shuffle
 
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from job.data import *
 

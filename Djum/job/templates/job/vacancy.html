@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 
+    title = models.CharField(max_length=64, verbose_name="Профессия")
+    specialty = models.ForeignKey(Specialty, related_name="vacancies", on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, related_name="vacancies", on_delete=models.CASCADE)
+    skills = models.TextField(verbose_name="Навыки")
+    level = models.CharField(max_length=16, verbose_name="Уровень")
+    description = models.TextField(verbose_name="Описание", blank=True)
+    salary_min = models.IntegerField(verbose_name="Зарплата от")
+    salary_max = models.IntegerField(verbose_name="Зарплата до")
+    published_at = models.DateField(verbose_name="Опубликовано", auto_now_add=True)
+
+
 {% block cards1 %}
+
     <div class="row mt-5">
       <div class="col-12 col-lg-2">
         <div class="pl-3 mb-5">
@@ -9,34 +21,29 @@
       </div>
       <div class="col-12 col-lg-8">
         <section class="pl-3">
-          <a href="#"><img src="../../static/logs/logo{{ flag_company.0.pk }}.png" width="130" height="80" alt=""></a>
+          <a href="#"><img src="../../static/logs/logo{{ vacancy.pk }}.png" width="130" height="80" alt=""></a>
           <div class="d-flex align-items-baseline align-content-baseline">
-            <h1 class="h2 mt-4 font-weight-bold" >Backend-разработчик</h1>
-            <p class="m-0 pl-3">120 000 – 220 000 Р</p>
+            <h1 class="h2 mt-4 font-weight-bold" >{{ vacancy }}</h1>
+            <p class="m-0 pl-3">{{ vacancy.salary_min }} – {{ vacancy.salary_max }} Р</p>
           </div>
-          <p class="mt-2">Бэкенд • Средний (Middle) • PHP • PostgreSQL • MySQL • Node.js • Laravel • Symfony • Yii framework • Sails.js • Rabbitmq • Kafka</p>
-          <p class="text-muted mb-4">Primal Assault (15-30 человек), Рязань или удаленно</p>
+          <p class="mt-2">{{ vacancy.specialty }} • {{ vacancy.level }} • {{ vacancy.skills }}</p>
+          <p class="text-muted mb-4">{{ vacancy.company }} ({{ vacancy.company.employee_count }} человек), {{ vacancy.company.location }} или удаленно</p>
           <div style="line-height: 1.8;">
-            <p>Финтех компаниявходит в международную группу  и занимается развитием факторингового бизнеса. В связи с расширением штата, мы хотим усилить нашу команду Backend-разработчиком, для работы над улучшением продуктов компании.</p>
+            <p>{% lorem 30 w random %}</p>
             <p><b>Мы предлагаем: </b><br>
-              Оформление по ТК РФ<br>
-              ДМС со стоматологией<br>
-              Достойную зарплату, уровень которой можно обсудить по телефону с рекрутером<br>
-              Гибкое начало дня, отдельные дни удаленной работы обсуждаются<br>
-              Современный офис<br>
-              Демократичную корпоративную культуру<br>
-              Работу в команде по Scrum
+             <ul> {% for p in promises %}
+               <li> {{ p }} </li>
+            {% endfor %}</ul>
             </p>
             <p><b>Какая работа тебя ждет: </b><br>
-              Написание бизнес-логики по ТЗ от аналитиков<br>
-              Вынесение общий логики в базовые сервисы<br>
-              Интеграция с внешними системами, рефкторинг.
+              <ul>{% for w in waiting %}
+               <li> {{ w }} </li>
+            {% endfor %}</ul>
             </p>
             <p><b>Кого мы ищем: </b><br>
-              Опытного разработчика на C# (от 3х лет)<br>
-              Хорошие знания: ASP.Net MVC, EF CodeFirst, MS SQL, AutoFac (или другой IoC), RabbitMq <br>
-              Навыки проектирования и рефакторинга доменной модели <br>
-              git, gitflow, bitBucket, youTrack (или альтернативы)
+              <ul>{% for s in serching %}
+                 <li> {{ s }} </li>
+            {% endfor %}</ul>
             </p>
             <p><b>Будет отлично, если ты:</b><br>
               Имеешь опыт работы с ЭДО, электронными подписями<br>
