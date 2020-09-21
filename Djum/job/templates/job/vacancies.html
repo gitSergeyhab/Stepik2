@@ -2,20 +2,7 @@
 
 
 {% block first_section %}
-
-  {% if flag_specialty %}
-   <h1 class="h1 text-center mx-auto mt-4 pt-5" style="font-size: 70px;"><strong>{{ flag_specialty.0 }}</strong></h1>
-  {% elif flag_company %}
-    <div class="my-3">
-      <img class="rounded mx-auto d-block" src="../../static/logs/logo{{ flag_company.0.pk }}.png" width="130" height="80" alt="flag_company">
-      <div>
-        <h1 class="h1 text-center mx-auto my-0 py-0" style="font-size: 70px;"><strong>{{ flag_company.0 }}</strong></h1>
-      </div>
-    </div>
-  {% else %}
-  <h1 class="h1 text-center mx-auto mt-4 pt-5" style="font-size: 70px;"><strong>Все вакансии</strong></h1>
-
-  {% endif %}
+  {% include 'incl/_first_section_if.html' %}
 {% endblock %}
 
 
@@ -24,11 +11,7 @@
       <p class="text-center pt-1">{{ vacancies|length }} вакансий</p>
       <div class="row mt-5">
         <div class="col-12 col-lg-8 offset-lg-2 m-auto">
-
-          {% for vac in vacancies %}
             {% include 'incl/_vacancy_card.html' %}
-          {% endfor %}
-
         </div>
       </div>
     </section>
