@@ -5,10 +5,15 @@ from django.views import View
 from django.views.generic import ListView, DetailView
 from .models import Specialty, Company, Vacancy
 from .models import skillist
+from .data import promises, waiting, serching
 from random import shuffle
 
 title = 'Джуманджи'
 shuffle(skillist)
+shuffle(promises)
+shuffle(waiting)
+shuffle(serching)
+
 
 class MainView(ListView):
     model = Specialty
@@ -55,7 +60,14 @@ class ListVacancies(ListView):
 
 # – Одна вакансия /vacancies/22
 class OneVacancy(DetailView):
-    pass
+    model = Vacancy
+    template_name = 'job/vacancy.html'
+    extra_context = {
+        'title': title,
+        'promises': promises[:5],
+        'serching': serching[:3],
+        'waiting': waiting[:4],
+    }
 
 
 # – Карточка компании  /companies/345
@@ -77,6 +89,4 @@ class Companies(ListView):
     model = Company
     template_name = 'job/companies.html'
     context_object_name = 'companies'
-    extra_context = {'title': title}
-
-
+    extra_context = {'title': title, }
