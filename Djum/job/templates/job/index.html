@@ -30,18 +30,22 @@
     <section class="mt-5 pt-3">
       <h2 class="h2 font-weight-normal text-center mb-5">Вакансии по рубрикам</h2>
       <div class="row mb-0">
+
         {% for ob in main_specialty %}
         <div class="col-6 col-md-6 col-lg-3">
           <div class="card pt-4 text-center mb-4">
-            <img class="mx-auto d-block" src="../static/pics/specty_{{ ob.code }}.png" width="80" height="80" alt="">
+            <a href="{{ ob.get_absolute_url }}" style="max-width: 150px;" class="mx-auto d-block">
+              <img class="mx-auto d-block" src="../static/pics/specty_{{ ob.code }}.png" width="80" height="80" alt="">
+            </a>
             <div class="card-body">
               <p class="card-text mb-2">{{ ob.title }}</p>
-              <p class="card-text mb-2">{{ ob.slug }}</p>
-              <p class="card-text"><a href="{% url 'specialties' ob.slug %}">{{ ob.vacancies.all.count }} вакансий</a></p>
+              <p class="card-text"><a href="{{ ob.get_absolute_url }}">{{ ob.vacancies.all.count }} вакансий</a></p>
+<!--              <p class="card-text"><a href="{% url 'specialties' ob.slug %}">{{ ob.vacancies.all.count }} вакансий</a></p>-->
             </div>
           </div>
         </div>
         {% endfor %}
+
       </div>
     </section>
 {% endblock %}
@@ -50,19 +54,20 @@
     <section class="my-5 pt-3">
       <h2 class="h2 font-weight-normal text-center mb-5">Нам доверяют лучшие компании</h2>
       <div class="row mb-0">
+
         {% for com in company %}
         <div class="col-6 col-md-6 col-lg-3">
           <div class="card pt-4 text-center mb-4">
-            <a href="#" style="max-width: 150px;" class="mx-auto d-block">
+            <a href="{{ com.get_absolute_url }}" style="max-width: 150px;" class="mx-auto d-block">
               <img class="mx-auto d-block mw-100" src="../static/logs/logo{{com.id}}.png" alt="">
             </a>
-<!--            <p class="card-text mb-2">{{ com.name }}</p>-->
             <div class="card-body">
-              <p class="card-text"><a href="#">{{ com.vacancies.all.count }} вакансий</a></p>
+              <p class="card-text"><a href="{{ com.get_absolute_url }}">{{ com.vacancies.all.count }} вакансий</a></p>
             </div>
           </div>
         </div>
         {% endfor %}
+
       </div>
     </section>
 {% endblock %}

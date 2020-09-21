@@ -5,16 +5,17 @@ from .models import Specialty, Company, Vacancy
 
 
 class VacancyAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'specialty', 'company', 'salary_min', 'salary_max', 'published_at']
+    list_display = ['id', 'title', 'level', 'specialty', 'company', 'salary_min', 'salary_max', 'published_at']
     list_display_links = ['id', 'title']
     search_fields = ['title', 'specialty', 'company', 'published_at']
+    list_filter = ['level', 'specialty', 'company']
 
 
 class SpecialtyAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'code']
+    list_display = ['id', 'title', 'code', 'slug']
     list_display_links = ['id', 'title']
     search_fields = ['title']
-    # prepopulated_fields = {'slug': ('code',)}
+    prepopulated_fields = {'slug': ('code',)}
 
 
 class CompanyAdmin(admin.ModelAdmin):
