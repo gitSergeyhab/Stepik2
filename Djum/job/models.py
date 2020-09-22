@@ -1,9 +1,9 @@
 from django.db import models
+from django.urls import reverse
+
 from random import choice, shuffle
 
-from django.urls import reverse, reverse_lazy
-
-from job.data import *
+from job.data import jobs, skillist, companies, cities, specialties, level
 
 
 class Company(models.Model):
@@ -64,24 +64,24 @@ class Vacancy(models.Model):
         ordering = ['-published_at']
 
 
-
-
 def skill_maker(x):
     shuffle(skillist)
     xx = list(range(x - 1, x + 1))
     return ' • '.join(skillist[:choice(xx)])
 
 
+def database_maker():
+    for com in companies:
+        Company.objects.create(name=com['title'], location=choice(cities),
+                               employee_count=choice(list(range(1, 500))))
+    for sp in specialties:
+        Specialty.objects.create(code=sp['code'], slug=sp['code'], title=sp['title'])
+    for j in jobs:
+        Vacancy.objects.create(title=j['title'],
+                               specialty=Specialty.objects.filter(code=j['cat'])[0],
+                               company=Company.objects.filter(name=j['company'])[0],
+                               skills=skill_maker(6), level=choice(level), description=j['desc'],
+                               salary_min=j['salary_from'], salary_max=j['salary_to'])
+
 # уже выполнено - раскомментировать при создании базы данных
-# for com in companies:
-#     Company.objects.create(name=com['title'], location=choice(cities), employee_count=choice(list(range(1, 500))))
-#
-# for sp in specialties:
-#     Specialty.objects.create(code=sp['code'], slug=sp['code'], title=sp['title'])
-#
-# for j in jobs:
-#     Vacancy.objects.create(title=j['title'],
-#                            specialty=Specialty.objects.filter(code=j['cat'])[0],
-#                            company=Company.objects.filter(name=j['company'])[0],
-#                            skills=skill_maker(6), level=choice(level), description=j['desc'],
-#                            salary_min=j['salary_from'], salary_max=j['salary_to'])
+# database_maker()

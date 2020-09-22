@@ -1,18 +1,14 @@
-from django.shortcuts import render
-from django.views import View
+# from django.shortcuts import render
+# from django.views import View
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
 from .models import Specialty, Company, Vacancy
 from .models import skillist
-from .data import promises, waiting, serching
 from random import shuffle
 
 title = 'Джуманджи'
 shuffle(skillist)
-shuffle(promises)
-shuffle(waiting)
-shuffle(serching)
 
 
 class MainView(ListView):
@@ -63,12 +59,7 @@ class OneVacancy(DetailView):
     model = Vacancy
     context_object_name = 'vacancy'
     template_name = 'job/vacancy.html'
-    extra_context = {
-        'title': title,
-        'promises': promises[:5],
-        'serching': serching[:3],
-        'waiting': waiting[:4],
-    }
+    extra_context = {'title': title, }
 
 
 # – Карточка компании  /companies/345
