@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Компания | {{ block.super }}
+{% endblock %}
+
 {% block first_section %}
 
   {% include 'incl/_searcher.html' %}

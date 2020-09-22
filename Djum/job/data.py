@@ -156,3 +156,5 @@ skillist = ['Python', 'Django', 'Flask', 'PHP', 'JS', 'Node', 'Vue', 'React', 'G
             'C++', 'C#', 'C', 'Java', 'Kotlin', 'Pandas', 'Numpy', 'MySQL', 'Symfony', 'CodeIgniter', 'Yii 2',
             'Phalcon', 'Swift', 'ML', 'Паринг', 'BS4',
             'Grails', 'Vaadin', 'Spark', 'Bootstrap', 'Poco', 'Asio C++', 'WebSocket++', ]
+
+# print(Vacancy.objects.count())

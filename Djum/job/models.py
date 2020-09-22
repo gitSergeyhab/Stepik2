@@ -70,18 +70,21 @@ def skill_maker(x):
     return ' • '.join(skillist[:choice(xx)])
 
 
-def database_maker():
+def random_database():
     for com in companies:
-        Company.objects.create(name=com['title'], location=choice(cities),
-                               employee_count=choice(list(range(1, 500))))
+        if Company.objects.count() < 8:
+            Company.objects.create(name=com['title'], location=choice(cities),
+                                   employee_count=choice(list(range(1, 500))))
     for sp in specialties:
-        Specialty.objects.create(code=sp['code'], slug=sp['code'], title=sp['title'])
+        if Specialty.objects.count() < 8:
+            Specialty.objects.create(code=sp['code'], slug=sp['code'], title=sp['title'])
     for j in jobs:
-        Vacancy.objects.create(title=j['title'],
-                               specialty=Specialty.objects.filter(code=j['cat'])[0],
-                               company=Company.objects.filter(name=j['company'])[0],
-                               skills=skill_maker(6), level=choice(level), description=j['desc'],
-                               salary_min=j['salary_from'], salary_max=j['salary_to'])
+        if Vacancy.objects.count() < 40:
+            Vacancy.objects.create(title=j['title'],
+                                   specialty=Specialty.objects.filter(code=j['cat'])[0],
+                                   company=Company.objects.filter(name=j['company'])[0],
+                                   skills=skill_maker(6), level=choice(level), description=j['desc'],
+                                   salary_min=j['salary_from'], salary_max=j['salary_to'])
 
-# уже выполнено - раскомментировать при создании базы данных
-# database_maker()
+# раскомментировать при создании базы данных:
+# random_database()
